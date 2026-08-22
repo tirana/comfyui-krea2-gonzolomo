@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.4.0-cuda12.4-cudnn9-runtime
+FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
@@ -14,29 +14,33 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /workspace
 
-# 2. Clone ComfyUI and install requirements
+# 2. Clone ComfyUI from main / HEAD
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI
-WORKDIR /workspace/ComfyUI
-RUN pip install --no-cache-dir -r requirements.txt
 
-# 3. Download CLIP Text Encoder
-RUN mkdir -p models/clip && \
+# 3. Dependencies + RunPod Serverless SDK
+RUN pip install --no-cache-dir -r /workspace/ComfyUI/requirements.txt && \
+    pip install --no-cache-dir runpod websocket-client
+
+# 4. Download Qwen3-VL CLIP text encoder (Hugging Face)
+RUN mkdir -p /workspace/ComfyUI/models/clip && \
     curl -L -f "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true" \
-    -o models/clip/qwen3vl_4b_fp8_scaled.safetensors
+    -o /workspace/ComfyUI/models/clip/qwen3vl_4b_fp8_scaled.safetensors
 
-# 4. Download VAE
-RUN mkdir -p models/vae && \
+# 5. Download Krea-2 VAE (Hugging Face)
+RUN mkdir -p /workspace/ComfyUI/models/vae && \
     curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true" \
-    -o models/vae/qwen_image_vae.safetensors
+    -o /workspace/ComfyUI/models/vae/qwen_image_vae.safetensors
 
-# 5. Download UNET (Civitai API)
+# 6. Download GonzaLomo Krea 2 UNET (Civitai API)
 ARG CIVITAI_TOKEN
-RUN mkdir -p models/unet && \
+RUN mkdir -p /workspace/ComfyUI/models/unet && \
     curl -L -f \
     -H "Authorization: Bearer ${CIVITAI_TOKEN}" \
     "https://civitai.com/api/download/models/3204838?fileId=3088379" \
-    -o models/unet/gonzalomoKrea2_v30.safetensors
+    -o /workspace/ComfyUI/models/unet/gonzalomoKrea2_v30.safetensors
 
-EXPOSE 8188
+# 7. Copy Serverless Handler entrypoint
+COPY rpc_handler.py /workspace/rpc_handler.py
 
-CMD ["python3", "main.py", "--listen", "0.0.0.0", "--port", "8188", "--highvram"]
+WORKDIR /workspace
+CMD ["python3", "-u", "rpc_handler.py"]
