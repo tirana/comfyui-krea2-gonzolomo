@@ -67,7 +67,11 @@ def handler(job):
                 if file.endswith((".png", ".jpg", ".webp")):
                     path = os.path.join(root, file)
                     with open(path, "rb") as f:
-                        images.append(base64.b64encode(f.read()).decode("utf-8"))
+                        images.append({
+                            "filename": file,  # e.g. "ComfyUI_00001_.png"
+                            "type": "base64",
+                            "data": base64.b64encode(f.read()).decode("utf-8"),
+                        })
                     os.remove(path)
 
     return {"images": images}
