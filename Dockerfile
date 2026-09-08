@@ -43,8 +43,8 @@ RUN --mount=type=secret,id=CIVITAI_TOKEN \
     mkdir -p /workspace/ComfyUI/models/unet && \
     curl -L -f \
     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-    "https://civitai.com/api/download/models/3204838?fileId=3088379" \
-    -o /workspace/ComfyUI/models/unet/gonzalomoKrea2_v30.safetensors
+    "https://civitai.com/api/download/models/3245099?fileId=3128457" \
+    -o /workspace/ComfyUI/models/unet/gonzalomoKrea2_v40.safetensors
 
 # 7. Copy Serverless Handler
 COPY rpc_handler.py /workspace/rpc_handler.py
