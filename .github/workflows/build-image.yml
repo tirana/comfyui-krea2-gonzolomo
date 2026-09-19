@@ -7,6 +7,9 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  # Change this per model build (e.g. turo, gonzalomo_v4) alongside the UNET
+  # download step in the Dockerfile. Every build also pushes :latest.
+  IMAGE_TAG: krea2-gonzalomo
 
 jobs:
   build-and-push:
@@ -35,6 +38,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
           tags: |
+            type=raw,value=${{ env.IMAGE_TAG }}
             type=raw,value=latest
 
       - name: Build and push AMD64 image
