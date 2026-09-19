@@ -60,12 +60,21 @@ RUN mkdir -p /workspace/ComfyUI/models/vae && \
 #     -o /workspace/ComfyUI/models/unet/into_realism.safetensors
 
 #6. Download CyberRealistic Krea 2 v2 int8
+# RUN --mount=type=secret,id=CIVITAI_TOKEN \
+#     mkdir -p /workspace/ComfyUI/models/unet && \
+#     curl -L -f \
+#     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
+#     "https://civitai.com/api/download/models/3225443?fileId=3179824" \
+#     -o /workspace/ComfyUI/models/unet/cyber_realistic.safetensors
+
+
+#6. Download Krea2 FinalCut Universal V3 fp8
 RUN --mount=type=secret,id=CIVITAI_TOKEN \
     mkdir -p /workspace/ComfyUI/models/unet && \
     curl -L -f \
     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-    "https://civitai.com/api/download/models/3225443?fileId=3179824" \
-    -o /workspace/ComfyUI/models/unet/cyber_realistic.safetensors
+    "https://civitai.com/api/download/models/3320158?fileId=3205788" \
+    -o /workspace/ComfyUI/models/unet/final_cut.safetensors
 
 
 # 8. Copy Serverless Handler
