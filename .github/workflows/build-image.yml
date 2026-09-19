@@ -19,6 +19,15 @@ jobs:
       packages: write
 
     steps:
+      # Runner only has ~14GB free; CUDA torch + model weights need more.
+      - name: Free disk space
+        run: |
+          df -h /
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup \
+            /opt/hostedtoolcache/CodeQL /usr/share/swift /usr/local/share/boost
+          sudo docker image prune --all --force
+          df -h /
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -53,3 +62,9 @@ jobs:
             CIVITAI_TOKEN=${{ secrets.CIVITAI_TOKEN }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Disk usage after build
+        if: always()
+        run: |
+          df -h /
+          sudo docker system df
