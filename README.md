@@ -25,6 +25,10 @@ pushes `:latest`, so pin each endpoint to its own tag.
 | `lora_mix_2_1` | B        | face 1.0, m 1.0                                    |
 | `lora_mix_2_2` | B        | face 1.0, n 1.0                                    |
 
+Sampler: euler/simple, 10 steps (gonzalomo's), except any variant with the m
+LoRA, which uses euler/beta, 12 steps as its author recommends (m images come
+out fogged otherwise).
+
 Strengths live in `VARIANTS` in `test_requests.py`. After changing one, run
 `--dump` and `--chainlit ../chainlit/workflows` to regenerate both copies.
 

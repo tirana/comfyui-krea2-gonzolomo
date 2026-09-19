@@ -38,7 +38,7 @@ RUN mkdir -p /workspace/ComfyUI/models/vae && \
     curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true" \
     -o /workspace/ComfyUI/models/vae/qwen_image_vae.safetensors
 
-# 6. Download GonzaLomo Krea 2 UNET
+# 6. Download GonzaLomo Krea 2 UNET (fp8)
 # RUN --mount=type=secret,id=CIVITAI_TOKEN \
 #     mkdir -p /workspace/ComfyUI/models/unet && \
 #     curl -L -f \
@@ -47,34 +47,17 @@ RUN mkdir -p /workspace/ComfyUI/models/vae && \
 #     -o /workspace/ComfyUI/models/unet/gonzalomoKrea2_v40.safetensors
 
 # 6. Download base Krea 2 Turbo UNET (fp8)
-RUN mkdir -p /workspace/ComfyUI/models/unet && \
-    curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors?download=true" \
-    -o /workspace/ComfyUI/models/unet/krea2.safetensors
+#RUN mkdir -p /workspace/ComfyUI/models/unet && \
+#    curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors?download=true" \
+#    -o /workspace/ComfyUI/models/unet/krea2.safetensors
 
-# 7. Download LoraS
-# Face
+#6. Download IntoRealism Krea 2 UNET (int8)
 RUN --mount=type=secret,id=CIVITAI_TOKEN \
-    mkdir -p /workspace/ComfyUI/models/loras && \
+    mkdir -p /workspace/ComfyUI/models/unet && \
     curl -L -f \
     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-    "https://civitai.red/api/download/models/3242621?fileId=3125692" \
-    -o /workspace/ComfyUI/models/loras/face.safetensors
-
-# M v3
-RUN --mount=type=secret,id=CIVITAI_TOKEN \
-    mkdir -p /workspace/ComfyUI/models/loras && \
-    curl -L -f \
-    -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-    "https://civitai.red/api/download/models/3116175?fileId=2996388" \
-    -o /workspace/ComfyUI/models/loras/m.safetensors
-
-# N v4
-RUN --mount=type=secret,id=CIVITAI_TOKEN \
-    mkdir -p /workspace/ComfyUI/models/loras && \
-    curl -L -f \
-    -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-    "https://civitai.red/api/download/models/3147117?fileId=3027612" \
-    -o /workspace/ComfyUI/models/loras/n.safetensors
+    "https://civitai.com/api/download/models/3271538?fileId=3155486" \
+    -o /workspace/ComfyUI/models/unet/into_realism.safetensors
 
 # 8. Copy Serverless Handler
 COPY rpc_handler.py /workspace/rpc_handler.py
