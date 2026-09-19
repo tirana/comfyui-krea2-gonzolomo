@@ -46,9 +46,9 @@ RUN mkdir -p /workspace/ComfyUI/models/vae && \
 #     "https://civitai.com/api/download/models/3245099?fileId=3128457" \
 #     -o /workspace/ComfyUI/models/unet/gonzalomoKrea2_v40.safetensors
 
-# 6. Download base Krea 2 Turbo UNET (int8)
+# 6. Download base Krea 2 Turbo UNET (fp8)
 RUN mkdir -p /workspace/ComfyUI/models/unet && \
-    curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_int8_convrot.safetensors?download=true" \
+    curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors?download=true" \
     -o /workspace/ComfyUI/models/unet/krea2.safetensors
 
 # 7. Download LoraS

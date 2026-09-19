@@ -38,7 +38,6 @@ jobs:
             /usr/lib/llvm-* /usr/local/share/edge_driver /usr/local/share/gecko_driver \
             /usr/local/share/chromedriver-linux64
           sudo docker image prune --all --force
-          sudo du -xh --max-depth=2 / 2>/dev/null | sort -rh | head -25 || true
           df -h / /mnt || true
 
       - name: Checkout repository

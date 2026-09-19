@@ -19,7 +19,7 @@ subprocess.Popen(
     cwd="/workspace/ComfyUI"
 )
 
-def wait_for_comfyui(url="http://127.0.0.1:8188/system_stats", timeout=30):
+def wait_for_comfyui(url="http://127.0.0.1:8188/system_stats", timeout=180):
     start = time.time()
     while time.time() - start < timeout:
         try:
@@ -100,28 +100,39 @@ def handler(job):
     if not prompt_id:
         return {"error": "Failed to retrieve prompt_id", "response": res}
 
-    # Poll execution status
-    for _ in range(180):
+    # Poll execution status. History only gets the entry once the prompt has
+    # finished (or failed), and the first job on a cold worker also pays for
+    # loading the UNET and any LoRAs.
+    for _ in range(600):
         time.sleep(1)
         history = get_history(prompt_id)
         if prompt_id in history:
             break
+    else:
+        return {"error": f"Timed out waiting for prompt {prompt_id}"}
 
-    # Extract generated image outputs
+    entry = history[prompt_id]
+    status = entry.get("status", {})
+    if status.get("status_str") == "error":
+        return {"error": "ComfyUI execution failed", "details": status.get("messages")}
+
+    # Only this prompt's images, so a job never returns another job's leftovers.
     output_dir = "/workspace/ComfyUI/output"
     images = []
-    if os.path.exists(output_dir):
-        for root, _, files in os.walk(output_dir):
-            for file in sorted(files):
-                if file.endswith((".png", ".jpg", ".webp")):
-                    path = os.path.join(root, file)
-                    with open(path, "rb") as f:
-                        images.append({
-                            "filename": file,
-                            "type": "base64",
-                            "data": base64.b64encode(f.read()).decode("utf-8"),
-                        })
-                    os.remove(path)
+    for node_output in entry.get("outputs", {}).values():
+        for img in node_output.get("images", []):
+            if img.get("type") != "output":
+                continue
+            path = os.path.join(output_dir, img.get("subfolder", ""), img["filename"])
+            if not os.path.exists(path):
+                continue
+            with open(path, "rb") as f:
+                images.append({
+                    "filename": img["filename"],
+                    "type": "base64",
+                    "data": base64.b64encode(f.read()).decode("utf-8"),
+                })
+            os.remove(path)
 
     return {"images": images}
 
