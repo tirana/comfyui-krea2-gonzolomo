@@ -7,7 +7,7 @@ pushes `:latest`, so pin each endpoint to its own tag.
 | Endpoint | Image tag              | UNET                              | LoRAs            |
 |----------|------------------------|-----------------------------------|------------------|
 | A        | `:krea2-gonzalomo`      | `gonzalomoKrea2_v40.safetensors`  | none             |
-| B        | `:base-krea2-and-lora` | `krea2.safetensors` (Turbo, int8) | face, m, n       |
+| B        | `:base-krea2-and-lora` | `krea2.safetensors` (Turbo, fp8 scaled) | face, m, n       |
 
 ## Test requests
 
@@ -19,7 +19,7 @@ pushes `:latest`, so pin each endpoint to its own tag.
 | `base`         | B        | none                                               |
 | `lora_face`    | B        | face 1.0                                           |
 | `lora_m1`..`4` | B        | m 2.0 / 0.8 / 1.0 / 1.2                            |
-| `lora_n1`..`3` | B        | n 0.8 / 1.0 / 1.2                                  |
+| `lora_n1`..`4` | B        | n 0.8 / 1.0 / 1.2 / 2.0                            |
 | `lora_mix_3_1` | B        | face 0.85, m 0.8, n 0.6 (safe & balanced)          |
 | `lora_mix_3_2` | B        | face 0.7, m 1.05, n 0.5 (stronger explicitness)    |
 | `lora_mix_2_1` | B        | face 1.0, m 1.0                                    |

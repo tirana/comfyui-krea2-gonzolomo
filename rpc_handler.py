@@ -7,13 +7,16 @@ import urllib.error
 import subprocess
 import runpod
 
-# Start ComfyUI headlessly in the background
+# Start ComfyUI headlessly in the background. No --highvram: on a 24 GB card
+# the text encoder has to leave the GPU once the prompt is encoded, or patching
+# a LoRA into the fp8 UNET runs out of memory. --reserve-vram keeps headroom
+# for that patch step's temporaries.
 subprocess.Popen(
     [
         "python3", "main.py",
         "--listen", "127.0.0.1",
         "--port", "8188",
-        "--highvram",
+        "--reserve-vram", "2",
         "--disable-auto-launch"
     ],
     cwd="/workspace/ComfyUI"
