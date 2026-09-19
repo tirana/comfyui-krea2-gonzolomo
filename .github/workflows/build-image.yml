@@ -19,14 +19,21 @@ jobs:
       packages: write
 
     steps:
-      # Runner only has ~14GB free; CUDA torch + model weights need more.
+      # Runner only has ~14GB free. Build layers (~28GB) plus their compressed
+      # copies during "exporting layers" (~20GB) need ~50GB at peak.
       - name: Free disk space
         run: |
-          df -h /
+          df -h / /mnt || true
+          sudo swapoff -a
+          sudo rm -f /swapfile /mnt/swapfile
           sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup \
-            /opt/hostedtoolcache/CodeQL /usr/share/swift /usr/local/share/boost
+            /opt/hostedtoolcache /usr/share/swift /usr/local/share/boost \
+            /usr/lib/jvm /usr/local/lib/node_modules /usr/local/share/powershell \
+            /usr/local/share/chromium /opt/microsoft /opt/google /opt/az /opt/pipx \
+            /usr/lib/google-cloud-sdk /usr/local/julia* /usr/share/miniconda \
+            /usr/lib/mono /usr/local/aws-cli /usr/local/aws-sam-cli
           sudo docker image prune --all --force
-          df -h /
+          df -h / /mnt || true
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -66,5 +73,5 @@ jobs:
       - name: Disk usage after build
         if: always()
         run: |
-          df -h /
+          df -h / /mnt || true
           sudo docker system df
