@@ -52,12 +52,21 @@ RUN mkdir -p /workspace/ComfyUI/models/vae && \
 #    -o /workspace/ComfyUI/models/unet/krea2.safetensors
 
 #6. Download IntoRealism Krea 2 UNET (int8)
+# RUN --mount=type=secret,id=CIVITAI_TOKEN \
+#     mkdir -p /workspace/ComfyUI/models/unet && \
+#     curl -L -f \
+#     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
+#     "https://civitai.com/api/download/models/3271538?fileId=3155486" \
+#     -o /workspace/ComfyUI/models/unet/into_realism.safetensors
+
+#6. Download CyberRealistic Krea 2 v2 int8
 RUN --mount=type=secret,id=CIVITAI_TOKEN \
     mkdir -p /workspace/ComfyUI/models/unet && \
     curl -L -f \
     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-    "https://civitai.com/api/download/models/3271538?fileId=3155486" \
-    -o /workspace/ComfyUI/models/unet/into_realism.safetensors
+    "https://civitai.com/api/download/models/3225443?fileId=3179824" \
+    -o /workspace/ComfyUI/models/unet/cyber_realistic.safetensors
+
 
 # 8. Copy Serverless Handler
 COPY rpc_handler.py /workspace/rpc_handler.py

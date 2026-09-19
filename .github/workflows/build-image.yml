@@ -9,7 +9,7 @@ env:
   REGISTRY: ghcr.io
   # Change this per model build (e.g. turo, gonzalomo_v4) alongside the UNET
   # download step in the Dockerfile. Every build also pushes :latest.
-  IMAGE_TAG: krea2-into-realism
+  IMAGE_TAG: krea2-cyber-realistic
 
 jobs:
   build-and-push:
