@@ -57,7 +57,7 @@
   },
   {
     "tag": "qwen-image-2.1",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "qwen_image_2.1_int8_convrot.safetensors",
