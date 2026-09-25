@@ -1,20 +1,16 @@
 # syntax=docker/dockerfile:1
 FROM nvidia/cuda:13.0.3-runtime-ubuntu22.04
 
-# TORCH_DISABLE_NATIVE_JIT: newer torch routes some eager CUDA ops (bmm outer
-# products, hit by the Qwen3-VL text encoder's RoPE) to Triton kernels, and
-# Triton compiles a C launcher on first use. This runtime image has no C
-# compiler, so CLIPTextEncode died with "Failed to find C compiler". The switch
-# puts those ops back on the stock ATen kernels. See pytorch/pytorch#196977.
-# build-essential below covers the Triton paths the switch doesn't (e.g.
-# comfy_kitchen's Triton backend, enabled since cu130): they get a real gcc.
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     PIP_PREFER_BINARY=1 \
-    TORCH_DISABLE_NATIVE_JIT=1 \
     TORCH_CUDA_ARCH_LIST="8.0;8.6;8.9;9.0;10.0;12.0"
 
-# 1. System packages & Python
+# 1. System packages & Python. build-essential is for Triton: newer torch
+# (some eager CUDA ops, e.g. the Qwen3-VL text encoder's RoPE, see
+# pytorch/pytorch#196977) and comfy_kitchen's Triton backend (enabled since
+# cu130) compile a C launcher on first use, and without a compiler that fails
+# with "Failed to find C compiler".
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
