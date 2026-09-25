@@ -43,7 +43,7 @@
   },
   {
     "tag": "krea2-gonzalomo-v4",
-    "enabled": false,
+    "enabled": true,
     "unets": [
       {
         "file": "gonzalomoKrea2_v40.safetensors",
