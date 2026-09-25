@@ -14,16 +14,16 @@
     "vae_file": "qwen_image_vae.safetensors"
   },
   {
-    "tag": "qwen-image-2.1-uc",
+    "tag": "qwen-image-2.1",
     "enabled": true,
     "unets": [
       {
-        "file": "qwen_image_2.1_uc_int8_convrot.safetensors",
-        "url": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF/resolve/main/qwen-image-2.1-UC-int8_convrot.safetensors?download=true"
+        "file": "qwen_image_2.1_int8_convrot.safetensors",
+        "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors?download=true"
       }
     ],
-    "clip_url": "https://huggingface.co/pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF/resolve/main/qwen3vl_8b_fp8_heretic.safetensors?download=true",
-    "clip_file": "qwen3vl_8b_fp8_heretic.safetensors",
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors?download=true",
+    "clip_file": "qwen3vl_8b_int8_convrot.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors?download=true",
     "vae_file": "qwen_image_2.1_vae_bf16.safetensors"
   },

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04
+FROM nvidia/cuda:13.0.3-runtime-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
@@ -19,12 +19,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /workspace
 
-# 2. Clone ComfyUI from main / HEAD
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI
+# 2. Clone ComfyUI at a pinned release. Keep this on the latest published
+# release (https://github.com/Comfy-Org/ComfyUI/releases/latest — a release,
+# not just a newer tag) and bump it when a new one ships: an unpinned clone is
+# a cached build layer, so builds could silently keep an old ComfyUI or pick up
+# an unreleased change. Qwen Image 2.1 needs v0.37.0 or newer. Override for a
+# one-off build with --build-arg COMFYUI_VERSION=vX.Y.Z.
+ARG COMFYUI_VERSION=v0.37.0
+RUN git clone --depth 1 --branch "$COMFYUI_VERSION" https://github.com/Comfy-Org/ComfyUI.git /workspace/ComfyUI
 
 # 3. Install PyTorch from official index + ComfyUI dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128 && \
+    pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu130 && \
     pip install --no-cache-dir -r /workspace/ComfyUI/requirements.txt && \
     pip install --no-cache-dir runpod websocket-client
 
