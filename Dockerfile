@@ -37,9 +37,12 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # 4. Download the variant's models. The workflow's build matrix passes the
 # URLs and file names (UNETS is space-separated "file|url" pairs, so one image
 # can carry several UNETs); the layers above are shared by every variant. Civitai
-# downloads (civitai.com / civitai.red) need the CIVITAI_TOKEN secret.
+# downloads (civitai.com / civitai.red) need the CIVITAI_TOKEN secret; gated
+# Hugging Face repos (e.g. black-forest-labs) need HF_TOKEN from an account
+# that accepted the model's license. Public Hugging Face files work without it.
 ARG UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE
 RUN --mount=type=secret,id=CIVITAI_TOKEN,required=false \
+    --mount=type=secret,id=HF_TOKEN,required=false \
     set -e; \
     for v in UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE; do \
         eval "[ -n \"\$$v\" ]" || { echo "build arg $v is not set" >&2; exit 1; }; \
@@ -48,6 +51,12 @@ RUN --mount=type=secret,id=CIVITAI_TOKEN,required=false \
         mkdir -p "$(dirname "$2")"; \
         case "$1" in \
             *civitai.*) curl -L -f -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" "$1" -o "$2" ;; \
+            *huggingface.co*) \
+                if [ -s /run/secrets/HF_TOKEN ]; then \
+                    curl -L -f -H "Authorization: Bearer $(cat /run/secrets/HF_TOKEN)" "$1" -o "$2"; \
+                else \
+                    curl -L -f "$1" -o "$2"; \
+                fi ;; \
             *) curl -L -f "$1" -o "$2" ;; \
         esac; \
     }; \

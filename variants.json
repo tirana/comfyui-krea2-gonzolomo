@@ -1,7 +1,49 @@
 [
   {
-    "tag": "krea2-gonzalomo-v4",
+    "tag": "klein9b-bfl-fp8",
     "enabled": true,
+    "unets": [
+      {
+        "file": "flux-2-klein-9b-fp8.safetensors",
+        "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9b-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors?download=true"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors?download=true",
+    "clip_file": "qwen_3_8b_fp8mixed.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/vae/flux2-vae.safetensors?download=true",
+    "vae_file": "flux2-vae.safetensors"
+  },
+  {
+    "tag": "klein9b-gonzalomo-v1",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "gonzalomoKlein_v10_fp8.safetensors",
+        "url": "https://civitai.com/api/download/models/3045205?fileId=2924002"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors?download=true",
+    "clip_file": "qwen_3_8b_fp8mixed.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/vae/flux2-vae.safetensors?download=true",
+    "vae_file": "flux2-vae.safetensors"
+  },
+  {
+    "tag": "klein9b-kleinova-v53",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "kleinova_v53_fp8.safetensors",
+        "url": "https://civitai.com/api/download/models/3272968?fileId=3158155"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors?download=true",
+    "clip_file": "qwen_3_8b_fp8mixed.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/vae/flux2-vae.safetensors?download=true",
+    "vae_file": "flux2-vae.safetensors"
+  },
+  {
+    "tag": "krea2-gonzalomo-v4",
+    "enabled": false,
     "unets": [
       {
         "file": "gonzalomoKrea2_v40.safetensors",
@@ -15,7 +57,7 @@
   },
   {
     "tag": "qwen-image-2.1",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "qwen_image_2.1_int8_convrot.safetensors",
@@ -29,7 +71,7 @@
   },
   {
     "tag": "noct-q-v2",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "NoctQ_V2_base_int8_convrot.safetensors",

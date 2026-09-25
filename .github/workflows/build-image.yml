@@ -111,6 +111,7 @@ jobs:
             VAE_FILE=${{ matrix.vae_file }}
           secrets: |
             CIVITAI_TOKEN=${{ secrets.CIVITAI_TOKEN }}
+            HF_TOKEN=${{ secrets.HF_TOKEN }}
           cache-from: type=gha,scope=${{ matrix.tag }}
           cache-to: type=gha,mode=max,scope=${{ matrix.tag }}
 
