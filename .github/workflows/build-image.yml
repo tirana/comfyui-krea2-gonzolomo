@@ -112,8 +112,10 @@ jobs:
           secrets: |
             CIVITAI_TOKEN=${{ secrets.CIVITAI_TOKEN }}
             HF_TOKEN=${{ secrets.HF_TOKEN }}
-          cache-from: type=gha,scope=${{ matrix.tag }}
-          cache-to: type=gha,mode=max,scope=${{ matrix.tag }}
+          # No GitHub Actions cache: each variant's model layer (~18 GB) is bigger
+          # than the repo's 10 GB cache, and uploading it outlasts the cache's
+          # one-hour upload URL ("Signature not valid in the specified time
+          # frame"), which failed the build. The base layers are rebuilt instead.
 
       - name: Disk usage after build
         if: always()
