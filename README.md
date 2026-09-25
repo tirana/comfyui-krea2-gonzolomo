@@ -4,8 +4,8 @@ RunPod serverless ComfyUI worker (`rpc_handler.py`). One Dockerfile builds one
 image per model variant listed in `variants.json`; the workflow builds every
 enabled variant one after another and pushes each as
 `ghcr.io/<repo>:<tag>`. There is no `:latest`; pin each endpoint to its tag.
-Only the Klein variants are enabled right now; the Krea and Qwen ones are kept
-in `variants.json` with `"enabled": false`.
+Which variants build on push is the `enabled` flag in `variants.json`; the
+others stay listed with `"enabled": false`.
 
 | Tag | UNET (`models/unet`) | Text encoder (`models/clip`) | VAE (`models/vae`) | Sampler |
 |---|---|---|---|---|

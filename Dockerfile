@@ -6,6 +6,8 @@ FROM nvidia/cuda:13.0.3-runtime-ubuntu22.04
 # Triton compiles a C launcher on first use. This runtime image has no C
 # compiler, so CLIPTextEncode died with "Failed to find C compiler". The switch
 # puts those ops back on the stock ATen kernels. See pytorch/pytorch#196977.
+# build-essential below covers the Triton paths the switch doesn't (e.g.
+# comfy_kitchen's Triton backend, enabled since cu130): they get a real gcc.
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     PIP_PREFER_BINARY=1 \
@@ -14,6 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # 1. System packages & Python
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     git \
     curl \
     python3 \
