@@ -1,0 +1,104 @@
+[
+  {
+    "tag": "krea2-gonzalomo-v4",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "gonzalomoKrea2_v40.safetensors",
+        "url": "https://civitai.com/api/download/models/3245099?fileId=3128457"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_fp8_scaled.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
+    "vae_file": "qwen_image_vae.safetensors"
+  },
+  {
+    "tag": "qwen-image-2.1-uc",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "qwen_image_2.1_uc_int8_convrot.safetensors",
+        "url": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF/resolve/main/qwen-image-2.1-UC-int8_convrot.safetensors?download=true"
+      }
+    ],
+    "clip_url": "https://huggingface.co/pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-GGUF/resolve/main/qwen3vl_8b_fp8_heretic.safetensors?download=true",
+    "clip_file": "qwen3vl_8b_fp8_heretic.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors?download=true",
+    "vae_file": "qwen_image_2.1_vae_bf16.safetensors"
+  },
+  {
+    "tag": "noct-q-v2",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "NoctQ_V2_base_int8_convrot.safetensors",
+        "url": "https://civitai.red/api/download/models/3353641?fileId=3241054"
+      },
+      {
+        "file": "NoctQ_V2_turbo_int8_convrot.safetensors",
+        "url": "https://civitai.red/api/download/models/3353646?fileId=3241045"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors?download=true",
+    "clip_file": "qwen3vl_8b_int8_convrot.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors?download=true",
+    "vae_file": "qwen_image_2.1_vae_bf16.safetensors"
+  },
+  {
+    "tag": "krea2-final-cut",
+    "enabled": false,
+    "unets": [
+      {
+        "file": "final_cut.safetensors",
+        "url": "https://civitai.com/api/download/models/3320158?fileId=3205788"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_fp8_scaled.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
+    "vae_file": "qwen_image_vae.safetensors"
+  },
+  {
+    "tag": "krea2-into-realism",
+    "enabled": false,
+    "unets": [
+      {
+        "file": "into_realism.safetensors",
+        "url": "https://civitai.com/api/download/models/3271538?fileId=3155486"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_fp8_scaled.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
+    "vae_file": "qwen_image_vae.safetensors"
+  },
+  {
+    "tag": "krea2-cyber-realistic",
+    "enabled": false,
+    "unets": [
+      {
+        "file": "cyber_realistic.safetensors",
+        "url": "https://civitai.com/api/download/models/3225443?fileId=3179824"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_fp8_scaled.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
+    "vae_file": "qwen_image_vae.safetensors"
+  },
+  {
+    "tag": "krea2-turbo",
+    "enabled": false,
+    "unets": [
+      {
+        "file": "krea2.safetensors",
+        "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors?download=true"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_fp8_scaled.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
+    "vae_file": "qwen_image_vae.safetensors"
+  }
+]

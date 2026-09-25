@@ -28,56 +28,30 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r /workspace/ComfyUI/requirements.txt && \
     pip install --no-cache-dir runpod websocket-client
 
-# 4. Download Qwen3-VL CLIP text encoder
-RUN mkdir -p /workspace/ComfyUI/models/clip && \
-    curl -L -f "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true" \
-    -o /workspace/ComfyUI/models/clip/qwen3vl_4b_fp8_scaled.safetensors
+# 4. Download the variant's models. The workflow's build matrix passes the
+# URLs and file names (UNETS is space-separated "file|url" pairs, so one image
+# can carry several UNETs); the layers above are shared by every variant. Civitai
+# downloads (civitai.com / civitai.red) need the CIVITAI_TOKEN secret.
+ARG UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE
+RUN --mount=type=secret,id=CIVITAI_TOKEN,required=false \
+    set -e; \
+    for v in UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE; do \
+        eval "[ -n \"\$$v\" ]" || { echo "build arg $v is not set" >&2; exit 1; }; \
+    done; \
+    dl() { \
+        mkdir -p "$(dirname "$2")"; \
+        case "$1" in \
+            *civitai.*) curl -L -f -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" "$1" -o "$2" ;; \
+            *) curl -L -f "$1" -o "$2" ;; \
+        esac; \
+    }; \
+    for u in $UNETS; do \
+        dl "${u#*|}" "/workspace/ComfyUI/models/unet/${u%%|*}"; \
+    done; \
+    dl "$CLIP_URL" "/workspace/ComfyUI/models/clip/$CLIP_FILE"; \
+    dl "$VAE_URL" "/workspace/ComfyUI/models/vae/$VAE_FILE"
 
-# 5. Download Krea-2 VAE
-RUN mkdir -p /workspace/ComfyUI/models/vae && \
-    curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true" \
-    -o /workspace/ComfyUI/models/vae/qwen_image_vae.safetensors
-
-# 6. Download GonzaLomo Krea 2 UNET (fp8)
-# RUN --mount=type=secret,id=CIVITAI_TOKEN \
-#     mkdir -p /workspace/ComfyUI/models/unet && \
-#     curl -L -f \
-#     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-#     "https://civitai.com/api/download/models/3245099?fileId=3128457" \
-#     -o /workspace/ComfyUI/models/unet/gonzalomoKrea2_v40.safetensors
-
-# 6. Download base Krea 2 Turbo UNET (fp8)
-#RUN mkdir -p /workspace/ComfyUI/models/unet && \
-#    curl -L -f "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors?download=true" \
-#    -o /workspace/ComfyUI/models/unet/krea2.safetensors
-
-#6. Download IntoRealism Krea 2 UNET (int8)
-# RUN --mount=type=secret,id=CIVITAI_TOKEN \
-#     mkdir -p /workspace/ComfyUI/models/unet && \
-#     curl -L -f \
-#     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-#     "https://civitai.com/api/download/models/3271538?fileId=3155486" \
-#     -o /workspace/ComfyUI/models/unet/into_realism.safetensors
-
-#6. Download CyberRealistic Krea 2 v2 int8
-# RUN --mount=type=secret,id=CIVITAI_TOKEN \
-#     mkdir -p /workspace/ComfyUI/models/unet && \
-#     curl -L -f \
-#     -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-#     "https://civitai.com/api/download/models/3225443?fileId=3179824" \
-#     -o /workspace/ComfyUI/models/unet/cyber_realistic.safetensors
-
-
-#6. Download Krea2 FinalCut Universal V3 fp8
-RUN --mount=type=secret,id=CIVITAI_TOKEN \
-    mkdir -p /workspace/ComfyUI/models/unet && \
-    curl -L -f \
-    -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" \
-    "https://civitai.com/api/download/models/3320158?fileId=3205788" \
-    -o /workspace/ComfyUI/models/unet/final_cut.safetensors
-
-
-# 8. Copy Serverless Handler
+# 5. Copy Serverless Handler
 COPY rpc_handler.py /workspace/rpc_handler.py
 
 WORKDIR /workspace

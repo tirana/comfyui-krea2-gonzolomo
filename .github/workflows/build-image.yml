@@ -4,19 +4,53 @@ on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      variant:
+        description: "Tag from variants.json to build, or 'all' for every enabled one"
+        default: all
 
 env:
   REGISTRY: ghcr.io
-  # Change this per model build (e.g. turo, gonzalomo_v4) alongside the UNET
-  # download step in the Dockerfile. Every build also pushes :latest.
-  IMAGE_TAG: krea2-final-cut
 
 jobs:
+  # Picks the variants to build from variants.json: every enabled one, or just
+  # the one named on a manual run (disabled ones can be built that way too).
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.pick.outputs.matrix }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Pick variants
+        id: pick
+        env:
+          VARIANT: ${{ inputs.variant || 'all' }}
+        run: |
+          matrix=$(jq -c --arg v "$VARIANT" \
+            'map(select(if $v == "all" then .enabled else .tag == $v end)
+                 | .unets = (.unets | map(.file + "|" + .url) | join(" ")))' variants.json)
+          if [ "$matrix" = "[]" ]; then
+            echo "No variant matches '$VARIANT'" >&2
+            exit 1
+          fi
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+
+  # One image per variant, one at a time. Each job gets a fresh runner, so the
+  # disk cleanup below applies to every build.
   build-and-push:
+    needs: setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.setup.outputs.matrix) }}
+    name: build (${{ matrix.tag }})
 
     steps:
       # Runner only has ~14GB free. Build layers (~28GB) plus their compressed
@@ -59,8 +93,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
           tags: |
-            type=raw,value=${{ env.IMAGE_TAG }}
-            type=raw,value=latest
+            type=raw,value=${{ matrix.tag }}
 
       - name: Build and push AMD64 image
         uses: docker/build-push-action@v7
@@ -70,10 +103,16 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            UNETS=${{ matrix.unets }}
+            CLIP_URL=${{ matrix.clip_url }}
+            CLIP_FILE=${{ matrix.clip_file }}
+            VAE_URL=${{ matrix.vae_url }}
+            VAE_FILE=${{ matrix.vae_file }}
           secrets: |
             CIVITAI_TOKEN=${{ secrets.CIVITAI_TOKEN }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ matrix.tag }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.tag }}
 
       - name: Disk usage after build
         if: always()
