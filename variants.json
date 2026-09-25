@@ -28,20 +28,6 @@
     "vae_file": "flux2-vae.safetensors"
   },
   {
-    "tag": "klein9b-kleinova-v53",
-    "enabled": true,
-    "unets": [
-      {
-        "file": "kleinova_v53_fp8.safetensors",
-        "url": "https://civitai.com/api/download/models/3272968?fileId=3158155"
-      }
-    ],
-    "clip_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors?download=true",
-    "clip_file": "qwen_3_8b_fp8mixed.safetensors",
-    "vae_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/vae/flux2-vae.safetensors?download=true",
-    "vae_file": "flux2-vae.safetensors"
-  },
-  {
     "tag": "krea2-gonzalomo-v4",
     "enabled": true,
     "unets": [

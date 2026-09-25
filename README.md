@@ -11,7 +11,6 @@ others stay listed with `"enabled": false`.
 |---|---|---|---|---|
 | `klein9b-bfl-fp8` | `flux-2-klein-9b-fp8.safetensors` (official, BFL) | `qwen_3_8b_fp8mixed.safetensors` | `flux2-vae.safetensors` | euler, Flux2Scheduler, 4 steps, cfg 1 |
 | `klein9b-gonzalomo-v1` | `gonzalomoKlein_v10_fp8.safetensors` | `qwen_3_8b_fp8mixed.safetensors` | `flux2-vae.safetensors` | euler / beta, 8 steps, cfg 1 |
-| `klein9b-kleinova-v53` | `kleinova_v53_fp8.safetensors` | `qwen_3_8b_fp8mixed.safetensors` | `flux2-vae.safetensors` | euler, Flux2Scheduler, 12 steps, cfg 1.1 |
 | `krea2-gonzalomo-v4` | `gonzalomoKrea2_v40.safetensors` | `qwen3vl_4b_fp8_scaled.safetensors` | `qwen_image_vae.safetensors` | Krea 2 |
 | `qwen-image-2.1` | `qwen_image_2.1_int8_convrot.safetensors` (official, Comfy-Org) | `qwen3vl_8b_int8_convrot.safetensors` | `qwen_image_2.1_vae_bf16.safetensors` | euler / simple, 40 steps, cfg 1 |
 | `noct-q-v2` | `NoctQ_V2_base_int8_convrot.safetensors` (Base)<br>`NoctQ_V2_turbo_int8_convrot.safetensors` (Turbo) | `qwen3vl_8b_int8_convrot.safetensors` | `qwen_image_2.1_vae_bf16.safetensors` | Base: euler / simple, 25–50 steps, cfg 1<br>Turbo: euler, 5 steps, cfg 1, `ManualSigmas` schedule from the Noct-Q workflow |
