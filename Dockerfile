@@ -46,6 +46,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # downloads (civitai.com / civitai.red) need the CIVITAI_TOKEN secret; gated
 # Hugging Face repos (e.g. black-forest-labs) need HF_TOKEN from an account
 # that accepted the model's license. Public Hugging Face files work without it.
+# get() retries and resumes: Civitai drops long transfers mid-file (curl exit 18),
+# which otherwise fails the whole build.
 ARG UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE
 RUN --mount=type=secret,id=CIVITAI_TOKEN,required=false \
     --mount=type=secret,id=HF_TOKEN,required=false \
@@ -53,17 +55,18 @@ RUN --mount=type=secret,id=CIVITAI_TOKEN,required=false \
     for v in UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE; do \
         eval "[ -n \"\$$v\" ]" || { echo "build arg $v is not set" >&2; exit 1; }; \
     done; \
+    get() { curl -L -f --retry 5 --retry-all-errors --retry-delay 10 -C - "$@"; }; \
     dl() { \
         mkdir -p "$(dirname "$2")"; \
         case "$1" in \
-            *civitai.*) curl -L -f -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" "$1" -o "$2" ;; \
+            *civitai.*) get -H "Authorization: Bearer $(cat /run/secrets/CIVITAI_TOKEN)" "$1" -o "$2" ;; \
             *huggingface.co*) \
                 if [ -s /run/secrets/HF_TOKEN ]; then \
-                    curl -L -f -H "Authorization: Bearer $(cat /run/secrets/HF_TOKEN)" "$1" -o "$2"; \
+                    get -H "Authorization: Bearer $(cat /run/secrets/HF_TOKEN)" "$1" -o "$2"; \
                 else \
-                    curl -L -f "$1" -o "$2"; \
+                    get "$1" -o "$2"; \
                 fi ;; \
-            *) curl -L -f "$1" -o "$2" ;; \
+            *) get "$1" -o "$2" ;; \
         esac; \
     }; \
     for u in $UNETS; do \
