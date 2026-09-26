@@ -29,7 +29,7 @@
   },
   {
     "tag": "klein9b-true-v3",
-    "enabled": false,
+    "enabled": true,
     "unets": [
       {
         "file": "Flux2-Klein-9B-True-V3-fp8mixed.safetensors",
@@ -71,7 +71,7 @@
   },
   {
     "tag": "noct-q-v2",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "NoctQ_V2_base_int8_convrot.safetensors",
