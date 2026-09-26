@@ -29,7 +29,7 @@
   },
   {
     "tag": "klein9b-true-v3",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "Flux2-Klein-9B-True-V3-fp8mixed.safetensors",
@@ -57,7 +57,7 @@
   },
   {
     "tag": "qwen-image-2.1",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "qwen_image_2.1_int8_convrot.safetensors",
