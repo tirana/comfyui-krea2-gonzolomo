@@ -30,7 +30,8 @@ jobs:
         run: |
           matrix=$(jq -c --arg v "$VARIANT" \
             'map(select(if $v == "all" then .enabled else .tag == $v end)
-                 | .unets = (.unets | map(.file + "|" + .url) | join(" ")))' variants.json)
+                 | .unets = (.unets | map(.file + "|" + .url) | join(" "))
+                 | .loras = ((.loras // []) | map(.file + "|" + .url) | join(" ")))' variants.json)
           if [ "$matrix" = "[]" ]; then
             echo "No variant matches '$VARIANT'" >&2
             exit 1
@@ -92,8 +93,11 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
+          # The variant tag moves to each new build; the unique one
+          # (<tag>-<commit>-<run>) keeps pointing at this exact build.
           tags: |
             type=raw,value=${{ matrix.tag }}
+            type=sha,prefix=${{ matrix.tag }}-,suffix=-${{ github.run_number }}
 
       - name: Build and push AMD64 image
         uses: docker/build-push-action@v7
@@ -109,6 +113,7 @@ jobs:
             CLIP_FILE=${{ matrix.clip_file }}
             VAE_URL=${{ matrix.vae_url }}
             VAE_FILE=${{ matrix.vae_file }}
+            LORAS=${{ matrix.loras }}
           secrets: |
             CIVITAI_TOKEN=${{ secrets.CIVITAI_TOKEN }}
             HF_TOKEN=${{ secrets.HF_TOKEN }}

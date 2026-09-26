@@ -8,6 +8,12 @@
         "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9b-fp8/resolve/main/flux-2-klein-9b-fp8.safetensors?download=true"
       }
     ],
+    "loras": [
+      {
+        "file": "klein_slider_anatomy.safetensors",
+        "url": "https://civitai.com/api/download/models/2615554?fileId=2502989"
+      }
+    ],
     "clip_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors?download=true",
     "clip_file": "qwen_3_8b_fp8mixed.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/vae/flux2-vae.safetensors?download=true",
@@ -22,6 +28,12 @@
         "url": "https://civitai.com/api/download/models/3045205?fileId=2924002"
       }
     ],
+    "loras": [
+      {
+        "file": "klein_slider_anatomy.safetensors",
+        "url": "https://civitai.com/api/download/models/2615554?fileId=2502989"
+      }
+    ],
     "clip_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors?download=true",
     "clip_file": "qwen_3_8b_fp8mixed.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/vae/flux2-vae.safetensors?download=true",
@@ -34,6 +46,12 @@
       {
         "file": "Flux2-Klein-9B-True-V3-fp8mixed.safetensors",
         "url": "https://huggingface.co/wikeeyang/Flux2-Klein-9B-True-V3/resolve/main/Flux2-Klein-9B-True-V3-fp8mixed.safetensors?download=true"
+      }
+    ],
+    "loras": [
+      {
+        "file": "klein_slider_anatomy.safetensors",
+        "url": "https://civitai.com/api/download/models/2615554?fileId=2502989"
       }
     ],
     "clip_url": "https://huggingface.co/Comfy-Org/vae-text-encorder-for-flux-klein-9b/resolve/main/split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors?download=true",

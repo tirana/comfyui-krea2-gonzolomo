@@ -4,8 +4,14 @@ RunPod serverless ComfyUI worker (`rpc_handler.py`). One Dockerfile builds one
 image per model variant listed in `variants.json`; the workflow builds every
 enabled variant one after another and pushes each as
 `ghcr.io/<repo>:<tag>`. There is no `:latest`; pin each endpoint to its tag.
+Each build is also pushed as `<tag>-<commit>-<run>` (e.g.
+`klein9b-true-v3-0e1dba9-42`), which never moves: pin an endpoint to that to
+keep it on one build while `<tag>` follows the newest.
 Which variants build on push is the `enabled` flag in `variants.json`; the
 others stay listed with `"enabled": false`.
+A variant's optional `loras` list is downloaded into `models/loras`; the three
+Klein variants carry `klein_slider_anatomy.safetensors` (Klein Anatomy /
+Quality Fixer v1.5, Civitai), which the Klein workflows load at 2.5.
 
 | Tag | UNET (`models/unet`) | Text encoder (`models/clip`) | VAE (`models/vae`) | Sampler |
 |---|---|---|---|---|

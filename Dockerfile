@@ -41,13 +41,14 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # 4. Download the variant's models. The workflow's build matrix passes the
 # URLs and file names (UNETS is space-separated "file|url" pairs, so one image
-# can carry several UNETs); the layers above are shared by every variant. Civitai
-# downloads (civitai.com / civitai.red) need the CIVITAI_TOKEN secret; gated
+# can carry several UNETs; LORAS is the same, optional); the layers above are
+# shared by every variant. Civitai downloads (civitai.com / civitai.red) need
+# the CIVITAI_TOKEN secret; gated
 # Hugging Face repos (e.g. black-forest-labs) need HF_TOKEN from an account
 # that accepted the model's license. Public Hugging Face files work without it.
 # get() retries and resumes: Civitai drops long transfers mid-file (curl exit 18),
 # which otherwise fails the whole build.
-ARG UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE
+ARG UNETS CLIP_URL CLIP_FILE VAE_URL VAE_FILE LORAS
 RUN --mount=type=secret,id=CIVITAI_TOKEN,required=false \
     --mount=type=secret,id=HF_TOKEN,required=false \
     set -e; \
@@ -72,7 +73,10 @@ RUN --mount=type=secret,id=CIVITAI_TOKEN,required=false \
         dl "${u#*|}" "/workspace/ComfyUI/models/unet/${u%%|*}"; \
     done; \
     dl "$CLIP_URL" "/workspace/ComfyUI/models/clip/$CLIP_FILE"; \
-    dl "$VAE_URL" "/workspace/ComfyUI/models/vae/$VAE_FILE"
+    dl "$VAE_URL" "/workspace/ComfyUI/models/vae/$VAE_FILE"; \
+    for l in $LORAS; do \
+        dl "${l#*|}" "/workspace/ComfyUI/models/loras/${l%%|*}"; \
+    done
 
 # 5. Copy Serverless Handler
 COPY rpc_handler.py /workspace/rpc_handler.py
