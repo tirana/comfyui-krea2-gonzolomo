@@ -1,7 +1,7 @@
 [
   {
     "tag": "klein9b-bfl-fp8",
-    "enabled": false,
+    "enabled": true,
     "unets": [
       {
         "file": "flux-2-klein-9b-fp8.safetensors",
@@ -21,7 +21,7 @@
   },
   {
     "tag": "klein9b-gonzalomo-v1",
-    "enabled": false,
+    "enabled": true,
     "unets": [
       {
         "file": "gonzalomoKlein_v10_fp8.safetensors",
