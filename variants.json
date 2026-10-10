@@ -68,8 +68,8 @@
         "url": "https://civitai.com/api/download/models/3245099?fileId=3128457"
       }
     ],
-    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors?download=true",
-    "clip_file": "qwen3vl_4b_fp8_scaled.safetensors",
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_bf16.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_bf16.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
     "vae_file": "qwen_image_vae.safetensors"
   },
