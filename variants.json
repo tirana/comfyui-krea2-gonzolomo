@@ -61,7 +61,7 @@
   },
   {
     "tag": "krea2-gonzalomo-v4",
-    "enabled": false,
+    "enabled": true,
     "unets": [
       {
         "file": "gonzalomoKrea2_v40.safetensors",
@@ -75,7 +75,7 @@
   },
   {
     "tag": "krea2-snofs-v14",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "snofsSexNudesAndOther_krea2TurboV14.safetensors",
