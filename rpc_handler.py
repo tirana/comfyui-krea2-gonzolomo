@@ -105,9 +105,11 @@ def handler(job):
 
     # Poll execution status. History only gets the entry once the prompt has
     # finished (or failed), and the first job on a cold worker also pays for
-    # loading the UNET and any LoRAs.
-    for _ in range(600):
-        time.sleep(1)
+    # loading the UNET and any LoRAs. Every 0.1 s (10 minutes in all): the call
+    # is local and cheap, and a 1 s sleep left a finished image waiting for up
+    # to a second.
+    for _ in range(6000):
+        time.sleep(0.1)
         history = get_history(prompt_id)
         if prompt_id in history:
             break
