@@ -202,5 +202,5 @@
     "clip_file": "qwen3vl_4b_bf16.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
     "vae_file": "qwen_image_vae.safetensors"
-  },
+  }
 ]
