@@ -61,7 +61,7 @@
   },
   {
     "tag": "krea2-gonzalomo-v4",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "gonzalomoKrea2_v40.safetensors",
@@ -75,7 +75,7 @@
   },
  {
     "tag": "krea2-red-craft-v3",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "gonzalomoKrea2_v40.safetensors",
@@ -89,7 +89,7 @@
   },
   {
     "tag": "krea2-snofs-v14",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "snofsSexNudesAndOther_krea2TurboV14.safetensors",
@@ -188,5 +188,19 @@
     "clip_file": "qwen3vl_4b_fp8_scaled.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
     "vae_file": "qwen_image_vae.safetensors"
-  }
+  },
+  {
+    "tag": "krea2-lustify-v10",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "lustify-v10-krea-turbo-fp8.safetensors",
+        "url": "https://civitai.red/api/download/models/3112728?fileId=2997637"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_bf16.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_bf16.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
+    "vae_file": "qwen_image_vae.safetensors"
+  },
 ]
