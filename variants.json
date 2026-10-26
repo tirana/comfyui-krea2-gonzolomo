@@ -205,7 +205,7 @@
   },
   {
     "tag": "qwen-image-2.1-turbo",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "qwen_image_2.1_turbo_int8_convrot.safetensors",
@@ -219,7 +219,7 @@
   },
   {
     "tag": "noct-q-v4-base-nvfp4",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "Noct-Q-V4-Base-NVFP4.safetensors",
@@ -233,7 +233,7 @@
   },
   {
     "tag": "qwen-21-finalcut",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "qwen_image_21_FinalCut_FP8.safetensors",
@@ -247,7 +247,7 @@
   },
   {
     "tag": "redcraft-hybrid-v3",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "Krea2RedMix3.0-fp8-scaled-ComfyUI.safetensors",
@@ -258,5 +258,19 @@
     "clip_file": "qwen3vl_8b_int8_convrot.safetensors",
     "vae_url": "https://civitai.red/api/download/models/3407259?fileId=3298969",
     "vae_file": "texture_fix_vae_for_qwen_image_2.1_bf16.safetensors"
+  },
+  {
+    "tag": "krea2-muse-v4",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "museByStableYogi_v40INT8Extended.safetensors",
+        "url": "https://civitai.red/api/download/models/3425119?fileId=3319930"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen3-VL/resolve/main/text_encoders/qwen3vl_4b_bf16.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_bf16.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
+    "vae_file": "qwen_image_vae.safetensors"
   }
 ]
