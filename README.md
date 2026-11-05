@@ -22,6 +22,9 @@ Quality Fixer v1.5, Civitai), which the Klein workflows load at 2.5.
 | `krea2-snofs-v14` | `snofsSexNudesAndOther_krea2TurboV14.safetensors` (SNOFS Krea 2 Turbo v1.4, int8, Civitai) | `qwen3vl_4b_bf16.safetensors` (bf16, as the SNOFS author uses) | `qwen_image_vae.safetensors` | euler, 8 steps, cfg 1 |
 | `qwen-image-2.1` | `qwen_image_2.1_int8_convrot.safetensors` (official, Comfy-Org) | `qwen3vl_8b_int8_convrot.safetensors` | `qwen_image_2.1_vae_bf16.safetensors` | euler / simple, 40 steps, cfg 1 |
 | `noct-q-v2` | `NoctQ_V2_base_int8_convrot.safetensors` (Base)<br>`NoctQ_V2_turbo_int8_convrot.safetensors` (Turbo) | `qwen3vl_8b_int8_convrot.safetensors` | `qwen_image_2.1_vae_bf16.safetensors` | Base: euler / simple, 25–50 steps, cfg 1<br>Turbo: euler, 5 steps, cfg 1, `ManualSigmas` schedule from the Noct-Q workflow |
+| `moss-jib-mix-v2` | `Jib_Mix_Moss_V2_H_int8_00001_.safetensors` (Jib Mix Moss Realistic V2, int8, Civitai) | `qwen3.5_9b_int8_convrot.safetensors` (Comfy-Org MOSS-Image) | `flux2-vae.safetensors` (Comfy-Org MOSS-Image) | er_sde, 4–12 steps, cfg 1 (8-step LoRA merged in; the author's `bong_tangent` scheduler is a custom node, not core ComfyUI) |
+| `zit-pornmaster-v3.5` | `PornMaster_z-image_Turbo_V3.5_fp8.safetensors` (PornMaster Z-image Turbo V3.5 fp8, Civitai; renamed, the original name has spaces and `UNETS` is space-separated) | `qwen_3_4b.safetensors` (Comfy-Org z_image_turbo) | `ae.safetensors` (Comfy-Org z_image_turbo) | Z-Image Turbo |
+| `zit-cyberrealistic-v10` | `CyberRealistic_zit_v10.0_int8_convrot.safetensors` (CyberRealistic Z-Image Turbo v10, int8, Civitai) | `qwen_3_4b.safetensors` (Comfy-Org z_image_turbo) | `ae.safetensors` (Comfy-Org z_image_turbo) | 8–9 steps, cfg 1 |
 
 Qwen-Image 2.1 variants load the text encoder with `CLIPLoader` (type
 `qwen_image`) and encode with `TextEncodeQwenImage21`; the same files cover
@@ -34,7 +37,7 @@ each endpoint's allowed CUDA versions to 13.0 in RunPod.
 
 ComfyUI is pinned by `COMFYUI_VERSION` in the Dockerfile. Keep it on the latest
 published release (https://github.com/Comfy-Org/ComfyUI/releases/latest) and
-bump it when a new one ships.
+bump it when a new one ships. MOSS Image needs v0.42.0 or newer.
 
 To add a variant, add an entry to `variants.json`; `unets` can list several
 UNETs for one image, and the workflow JSON picks one by file name. Entries with

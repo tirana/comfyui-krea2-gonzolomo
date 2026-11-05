@@ -28,9 +28,10 @@ WORKDIR /workspace
 # release (https://github.com/Comfy-Org/ComfyUI/releases/latest — a release,
 # not just a newer tag) and bump it when a new one ships: an unpinned clone is
 # a cached build layer, so builds could silently keep an old ComfyUI or pick up
-# an unreleased change. Qwen Image 2.1 needs v0.37.0 or newer. Override for a
-# one-off build with --build-arg COMFYUI_VERSION=vX.Y.Z.
-ARG COMFYUI_VERSION=v0.37.0
+# an unreleased change. Qwen Image 2.1 needs v0.37.0 or newer, MOSS Image
+# v0.42.0 or newer. Override for a one-off build with
+# --build-arg COMFYUI_VERSION=vX.Y.Z.
+ARG COMFYUI_VERSION=v0.44.0
 RUN git clone --depth 1 --branch "$COMFYUI_VERSION" https://github.com/Comfy-Org/ComfyUI.git /workspace/ComfyUI
 
 # 3. Install PyTorch from official index + ComfyUI dependencies
