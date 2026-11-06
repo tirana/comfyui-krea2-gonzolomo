@@ -275,7 +275,7 @@
   },
   {
     "tag": "moss-jib-mix-v2",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "Jib_Mix_Moss_V2_H_int8_00001_.safetensors",
@@ -289,7 +289,7 @@
   },
   {
     "tag": "zit-pornmaster-v3.5",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "PornMaster_z-image_Turbo_V3.5_fp8.safetensors",
@@ -303,7 +303,7 @@
   },
   {
     "tag": "zit-cyberrealistic-v10",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "CyberRealistic_zit_v10.0_int8_convrot.safetensors",
@@ -314,5 +314,19 @@
     "clip_file": "qwen_3_4b.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors?download=true",
     "vae_file": "ae.safetensors"
+  },
+  {
+    "tag": "noct-q-v4-base-int8",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "NoctQ_V4_int8_convrot.safetensors",
+        "url": "https://civitai.red/api/download/models/3372040?fileId=3260131"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors?download=true",
+    "clip_file": "qwen3vl_8b_int8_convrot.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors?download=true",
+    "vae_file": "qwen_image_2.1_vae_bf16.safetensors"
   }
 ]

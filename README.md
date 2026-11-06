@@ -25,6 +25,7 @@ Quality Fixer v1.5, Civitai), which the Klein workflows load at 2.5.
 | `moss-jib-mix-v2` | `Jib_Mix_Moss_V2_H_int8_00001_.safetensors` (Jib Mix Moss Realistic V2, int8, Civitai) | `qwen3.5_9b_int8_convrot.safetensors` (Comfy-Org MOSS-Image) | `flux2-vae.safetensors` (Comfy-Org MOSS-Image) | er_sde, 4–12 steps, cfg 1 (8-step LoRA merged in; the author's `bong_tangent` scheduler is a custom node, not core ComfyUI) |
 | `zit-pornmaster-v3.5` | `PornMaster_z-image_Turbo_V3.5_fp8.safetensors` (PornMaster Z-image Turbo V3.5 fp8, Civitai; renamed, the original name has spaces and `UNETS` is space-separated) | `qwen_3_4b.safetensors` (Comfy-Org z_image_turbo) | `ae.safetensors` (Comfy-Org z_image_turbo) | Z-Image Turbo |
 | `zit-cyberrealistic-v10` | `CyberRealistic_zit_v10.0_int8_convrot.safetensors` (CyberRealistic Z-Image Turbo v10, int8, Civitai) | `qwen_3_4b.safetensors` (Comfy-Org z_image_turbo) | `ae.safetensors` (Comfy-Org z_image_turbo) | 8–9 steps, cfg 1 |
+| `noct-q-v4-base-int8` | `NoctQ_V4_int8_convrot.safetensors` (Noct-Q V4.0 Base, the author's own int8, Civitai) | `qwen3vl_8b_int8_convrot.safetensors` | `qwen_image_2.1_vae_bf16.safetensors` | euler / simple, 25 steps, cfg 3 with the author's negative prompt |
 
 Qwen-Image 2.1 variants load the text encoder with `CLIPLoader` (type
 `qwen_image`) and encode with `TextEncodeQwenImage21`; the same files cover
