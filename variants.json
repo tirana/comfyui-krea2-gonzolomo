@@ -288,20 +288,6 @@
     "vae_file": "flux2-vae.safetensors"
   },
   {
-    "tag": "zit-pornmaster-v3.5",
-    "enabled": false,
-    "unets": [
-      {
-        "file": "PornMaster_z-image_Turbo_V3.5_fp8.safetensors",
-        "url": "https://civitai.red/api/download/models/2836226?fileId=2722365"
-      }
-    ],
-    "clip_url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors?download=true",
-    "clip_file": "qwen_3_4b.safetensors",
-    "vae_url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors?download=true",
-    "vae_file": "ae.safetensors"
-  },
-  {
     "tag": "zit-cyberrealistic-v10",
     "enabled": false,
     "unets": [
