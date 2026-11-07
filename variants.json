@@ -61,7 +61,7 @@
   },
   {
     "tag": "krea2-gonzalomo-v4",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "gonzalomoKrea2_v40.safetensors",
@@ -191,7 +191,7 @@
   },
   {
     "tag": "krea2-lustify-v10",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "lustify-v10-krea-turbo-fp8.safetensors",
@@ -205,7 +205,7 @@
   },
   {
     "tag": "qwen-image-2.1-turbo",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "qwen_image_2.1_turbo_int8_convrot.safetensors",
@@ -214,20 +214,6 @@
     ],
     "clip_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors?download=true",
     "clip_file": "qwen3vl_8b_int8_convrot.safetensors",
-    "vae_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors?download=true",
-    "vae_file": "qwen_image_2.1_vae_bf16.safetensors"
-  },
-  {
-    "tag": "qwen-image-2.1-turbo-heretic",
-    "enabled": true,
-    "unets": [
-      {
-        "file": "qwen_image_2.1_turbo_int8_convrot.safetensors",
-        "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_turbo_int8_convrot.safetensors?download=true"
-      }
-    ],
-    "clip_url": "https://huggingface.co/pottokao/Qwen-Image-2.1-Text-Encoder-Heretic-int8-convrot/resolve/main/qwen3vl_8b_int8_convrot_heretic.safetensors?download=true",
-    "clip_file": "qwen3vl_8b_int8_convrot_heretic.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors?download=true",
     "vae_file": "qwen_image_2.1_vae_bf16.safetensors"
   },
@@ -294,6 +280,20 @@
       {
         "file": "Jib_Mix_Moss_V2_H_int8_00001_.safetensors",
         "url": "https://civitai.red/api/download/models/3435334?fileId=3332190"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/text_encoders/qwen3.5_9b_int8_convrot.safetensors?download=true",
+    "clip_file": "qwen3.5_9b_int8_convrot.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/vae/flux2-vae.safetensors?download=true",
+    "vae_file": "flux2-vae.safetensors"
+  },
+  {
+    "tag": "moss-yogi-realism-v1.5",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "Realism_By_Stable_Yogi_Moss_V1.5_INT8_ConvRot.safetensors",
+        "url": "https://civitai.red/api/download/models/3434061?fileId=3330643"
       }
     ],
     "clip_url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/text_encoders/qwen3.5_9b_int8_convrot.safetensors?download=true",
