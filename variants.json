@@ -331,7 +331,7 @@
   },
   {
     "tag": "gonzalomo-chroma-v3",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "gonzalomoChroma_v30_UNET_FP8.safetensors",
@@ -342,5 +342,19 @@
     "clip_file": "t5xxl_fp8_e4m3fn_scaled.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors?download=true",
     "vae_file": "ae.safetensors"
+  },
+  {
+    "tag": "dirty-moss-v2",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "Dirty-MossV2.safetensors",
+        "url": "https://civitai.red/api/download/models/3473330?fileId=3378062"
+      }
+    ],
+    "clip_url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/text_encoders/qwen3.5_9b_int8_convrot.safetensors?download=true",
+    "clip_file": "qwen3.5_9b_int8_convrot.safetensors",
+    "vae_url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/vae/flux2-vae.safetensors?download=true",
+    "vae_file": "flux2-vae.safetensors"
   }
 ]
