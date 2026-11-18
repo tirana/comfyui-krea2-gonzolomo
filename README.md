@@ -29,10 +29,19 @@ Quality Fixer v1.5, Civitai), which the Klein workflows load at 2.5.
 | `lustify-raw` | `lustify-v10-krea-raw-int8_convrot.safetensors` (LUSTIFY! v10 Krea 2 Raw, the undistilled build, int8, Civitai) | `qwen3vl_4b_bf16.safetensors` | `qwen_image_vae.safetensors` | Krea 2 Raw: about 28 steps, cfg 4.5 |
 | `zit-cyberrealistic-v10` | `CyberRealistic_zit_v10.0_int8_convrot.safetensors` (CyberRealistic Z-Image Turbo v10, int8, Civitai) | `qwen_3_4b.safetensors` (Comfy-Org z_image_turbo) | `ae.safetensors` (Comfy-Org z_image_turbo) | 8–9 steps, cfg 1 |
 | `noct-q-v4-base-int8` | `NoctQ_V4_int8_convrot.safetensors` (Noct-Q V4.0 Base, the author's own int8, Civitai) | `qwen3vl_8b_int8_convrot.safetensors` | `qwen_image_2.1_vae_bf16.safetensors` | euler / simple, 25 steps, cfg 3 with the author's negative prompt |
+| `flux3-klein-base-bf16` | `flux3-image-klein-base-bf16.safetensors` (FLUX 3 Image Klein Base, the undistilled 5.6B, official BFL, gated) | `qwen3vl_4b_bf16.safetensors` (BFL's flux-3-image-klein-comfy; CLIPLoader type `flux3`) | `flux2-vae.safetensors` (BFL's flux-3-image-klein-comfy) | euler / simple, 50 steps, cfg 3.5, 1024×1024, empty negative (ComfyUI's official template) |
 
 Qwen-Image 2.1 variants load the text encoder with `CLIPLoader` (type
 `qwen_image`) and encode with `TextEncodeQwenImage21`; the same files cover
 text-to-image and image edit.
+
+FLUX 3 Image Klein (`flux3-klein-base-bf16`) needs ComfyUI v0.41.0 or newer.
+The image leaves out the optional prompt upsampler
+(`qwen3.5_9b_flux3_prompt_upsampler_*`, a Qwen 3.5 9B that rewrites the prompt
+before rendering), since the prompt arrives fully written. Without it, the bf16
+UNET (11.1 GB), the bf16 text encoder (8.9 GB) and the VAE fit a 24 GB GPU;
+ComfyUI's template asks for more than 24 GB for bf16 only because it also
+loads the upsampler.
 
 The image uses PyTorch built for CUDA 13 (cu130), which ComfyUI's comfy_kitchen
 CUDA/Triton kernels need (with cu128 they are disabled and int8/fp8 models run
@@ -49,4 +58,6 @@ UNETs for one image, and the workflow JSON picks one by file name. Entries with
 Actions → Run workflow → `variant`. Civitai URLs (civitai.com or civitai.red)
 are downloaded with the `CIVITAI_TOKEN` secret. Gated Hugging Face repos (the
 official BFL Klein weights) need the `HF_TOKEN` secret: a read token from an
-account that accepted the model's license on its Hugging Face page.
+account that accepted the model's license on its Hugging Face page. FLUX 3
+Image Klein is gated on its own: accept the license on
+`black-forest-labs/flux-3-image-klein-comfy` as well.

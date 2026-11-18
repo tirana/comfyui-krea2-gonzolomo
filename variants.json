@@ -359,7 +359,7 @@
   },
   {
     "tag": "lustify-raw",
-    "enabled": true,
+    "enabled": false,
     "unets": [
       {
         "file": "lustify-v10-krea-raw-int8_convrot.safetensors",
@@ -370,5 +370,19 @@
     "clip_file": "qwen3vl_4b_bf16.safetensors",
     "vae_url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors?download=true",
     "vae_file": "qwen_image_vae.safetensors"
+  },
+  {
+    "tag": "flux3-klein-base-bf16",
+    "enabled": true,
+    "unets": [
+      {
+        "file": "flux3-image-klein-base-bf16.safetensors",
+        "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy/resolve/main/diffusion_models/flux3-image-klein-base-bf16.safetensors?download=true"
+      }
+    ],
+    "clip_url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy/resolve/main/text_encoders/qwen3vl_4b_bf16.safetensors?download=true",
+    "clip_file": "qwen3vl_4b_bf16.safetensors",
+    "vae_url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy/resolve/main/vae/flux2-vae.safetensors?download=true",
+    "vae_file": "flux2-vae.safetensors"
   }
 ]
