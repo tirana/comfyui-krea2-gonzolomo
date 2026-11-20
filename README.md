@@ -30,6 +30,7 @@ Quality Fixer v1.5, Civitai), which the Klein workflows load at 2.5.
 | `zit-cyberrealistic-v10` | `CyberRealistic_zit_v10.0_int8_convrot.safetensors` (CyberRealistic Z-Image Turbo v10, int8, Civitai) | `qwen_3_4b.safetensors` (Comfy-Org z_image_turbo) | `ae.safetensors` (Comfy-Org z_image_turbo) | 8–9 steps, cfg 1 |
 | `noct-q-v4-base-int8` | `NoctQ_V4_int8_convrot.safetensors` (Noct-Q V4.0 Base, the author's own int8, Civitai) | `qwen3vl_8b_int8_convrot.safetensors` | `qwen_image_2.1_vae_bf16.safetensors` | euler / simple, 25 steps, cfg 3 with the author's negative prompt |
 | `flux3-klein-base-bf16` | `flux3-image-klein-base-bf16.safetensors` (FLUX 3 Image Klein Base, the undistilled 5.6B, official BFL, gated) | `qwen3vl_4b_bf16.safetensors` (BFL's flux-3-image-klein-comfy; CLIPLoader type `flux3`) | `flux2-vae.safetensors` (BFL's flux-3-image-klein-comfy) | euler / simple, 50 steps, cfg 3.5, 1024×1024, empty negative (ComfyUI's official template) |
+| `minimax-h3-image-int8` | `minimax_h3_image_pruned_int8_convrot.safetensors` (MiniMax H3 Image, the pruned 33.1B, int8 ConvRot, Comfy-Org) | `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors` (Comfy-Org MiniMax-H3-Image; the same Qwen3-VL 32B encoder as H3 video) | `minimax_h3_image_vae_fp16.safetensors` (Comfy-Org MiniMax-H3-Image; the H3 video VAE does not work) | 6 steps, cfg 1, no negative prompt (step- and CFG-distilled) |
 
 Qwen-Image 2.1 variants load the text encoder with `CLIPLoader` (type
 `qwen_image`) and encode with `TextEncodeQwenImage21`; the same files cover
@@ -43,6 +44,14 @@ UNET (11.1 GB), the bf16 text encoder (8.9 GB) and the VAE fit a 24 GB GPU;
 ComfyUI's template asks for more than 24 GB for bf16 only because it also
 loads the upsampler.
 
+MiniMax H3 Image (`minimax-h3-image-int8`) needs ComfyUI v0.45.0 or newer
+(native support). One checkpoint does text-to-image and editing with up to 16
+reference images. The image leaves out the optional prompt expander
+(`qwen3.8_27b_minimax_h3_image_pe_*`). The int8 model (19.5 GiB), the nvfp4
+text encoder (14.6 GiB) and the VAE (1.1 GiB) come to about 35 GiB; ComfyUI
+can unload the encoder before sampling, so the peak is lower. H3 video, which has
+the same model size, peaked at 27–32 GB on a 32 GB RTX 5090 in published tests.
+
 The image uses PyTorch built for CUDA 13 (cu130), which ComfyUI's comfy_kitchen
 CUDA/Triton kernels need (with cu128 they are disabled and int8/fp8 models run
 on the slow eager path). CUDA 13 needs an NVIDIA driver 580 or newer, so set
@@ -50,7 +59,8 @@ each endpoint's allowed CUDA versions to 13.0 in RunPod.
 
 ComfyUI is pinned by `COMFYUI_VERSION` in the Dockerfile. Keep it on the latest
 published release (https://github.com/Comfy-Org/ComfyUI/releases/latest) and
-bump it when a new one ships. MOSS Image needs v0.42.0 or newer.
+bump it when a new one ships. MOSS Image needs v0.42.0 or newer, MiniMax H3
+Image v0.45.0 or newer.
 
 To add a variant, add an entry to `variants.json`; `unets` can list several
 UNETs for one image, and the workflow JSON picks one by file name. Entries with
